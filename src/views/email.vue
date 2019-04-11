@@ -1,5 +1,19 @@
 <template>
 	<div>
-		email:875994852@qq.com
+		email
+		<button @click="handleClick">点击</button>
 	</div>
 </template>
+
+<script>
+export default {
+	methods:{
+		handleClick(){
+			this.$bus.$emit('on-click','hello')
+		}
+	},
+	mounted(){
+		console.log(this.$bus);
+	}
+}
+</script>
