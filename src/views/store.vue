@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<h2>store.vue</h2>
-		<a-input @input="handleInput"/>
-		<p>{{inputValue}}--》lastLetter is {{inputValueLastLetter}}</p>
+		<a-input v-model="stateValue"/>
+		<p>{{stateValue}}--》lastLetter is {{inputValueLastLetter}}</p>
 		<p><Ashow :content='inputValue'></Ashow>
 		appName:{{appName}}</p>
 		<p>userName:{{userName}}</p>
@@ -20,6 +20,7 @@
 import AInput from '_C/AInput.vue'
 import Ashow from '_C/Ashow.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { stat } from 'fs';
 export default {
 	name:'store',
 	data(){
@@ -29,7 +30,8 @@ export default {
 	},
 	methods:{
 		...mapMutations([
-			'SET_APP_NAME'
+			'SET_APP_NAME',
+			'SET_STATE_VALUE'
 		]),
 		...mapMutations('user',[
 			'SET_USER_NAME'
@@ -42,16 +44,18 @@ export default {
 		},
 		handleChangeAppname(){
 			// this.$store.commit({
-			// 	type:'SET_APP_NAME',
-			// 	appName:'NewAppName'
+			// 	'type':'SET_APP_NAME',
+			// 	'appName':'NewAppName'
 			// })
-			// this.SET_APP_NAME('NewAppName')
+			this.SET_APP_NAME('NewAppName')
 			// this.$store.commit('SET_APP_VERSION')
-			this.updateAppName()
+			// this.$store.dispatch('updateAppName','123')
+			// this.updateAppName()
 		},
 		ChangeUserName(){
-			// this.SET_USER_NAME('vue-course')
-			this.$store.dispatch('updateAppName','123')
+			this.SET_USER_NAME('小新')
+
+			// this.$store.commit('SET_USER_NAME','NewUserName')
 		},
 		registerModule(){
 			this.$store.registerModule('todo',{
@@ -62,12 +66,15 @@ export default {
 					]
 				}
 			})
-		}
+		},
+		// handleStateValueChange(val){
+		// 	this.SET_STATE_VALUE(val)
+		// }
 	},
 	computed:{
 		...mapState({
 			appVersion:state=>state.appVersion,
-			todoList:state=>state.todo?state.todo.todoList:''
+			todoList:state=>state.todo?state.todo.todoList:[],
 		}),
 		...mapState('user',{
 			// appName:state=>state.appName,
@@ -83,6 +90,14 @@ export default {
 		...mapGetters('user',[
 			'firstLetter'
 		]),
+		stateValue:{
+			set(val){
+				this.SET_STATE_VALUE(val)
+			},
+			get(){
+				return this.$store.state.stateValue
+			}
+		},
 		appName(){
 			return this.$store.state.appName
 		},
