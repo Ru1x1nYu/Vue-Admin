@@ -2,41 +2,43 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/img/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-		<p>{{food}}</p>
+    <p>{{food}}</p>
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">返回上一页</button>
     <button @click="handleClick('replace')">返回上一页</button>
+    <button @click="getInfo">请求数据</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import { getUserInfo } from "@/api/user";
 
 export default {
   name: "home",
   components: {
     HelloWorld
-	},
-	props:{
-		food:{
-			type:String,
-			default:'nice'
-		}
-	},
-	beforeRouteEnter (to, from, next) {
-		next(vm=>{
-			console.log(vm);
-		})
-	},
-	// beforeRouteLeave (to, from, next) {
-	// 	const leave=confirm('您确定要离开吗?')
-	// 	if(leave){
-	// 		next()
-	// 	}else{
-	// 		next(false)
-	// 	}
-	// },
+  },
+  props: {
+    food: {
+      type: String,
+      default: "nice"
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      console.log(vm);
+    });
+  },
+  // beforeRouteLeave (to, from, next) {
+  // 	const leave=confirm('您确定要离开吗?')
+  // 	if(leave){
+  // 		next()
+  // 	}else{
+  // 		next(false)
+  // 	}
+  // },
   methods: {
     handleClick(type) {
       if (type === "back") {
@@ -51,6 +53,11 @@ export default {
       } else if (type === "replace") {
         this.$router.replace("parent");
       }
+    },
+    getInfo() {
+      getUserInfo({ userId: 21 }).then(res => {
+        console.log("res", res);
+      });
     }
   }
 };
