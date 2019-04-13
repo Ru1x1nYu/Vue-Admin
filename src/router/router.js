@@ -72,7 +72,11 @@ export default [
 		name:'store',
 		component:()=>import('@/views/store.vue')
 	},
-
+	{
+		path:'/count-to',
+		name:'count_to',
+		component:()=>import('@/views/count-to.vue')
+	},
 
 	{
 		path:'*',

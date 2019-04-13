@@ -9,7 +9,7 @@ class HttpRequest{
 
 	getInsideConfig(){
 		const config={
-			BASEURL:this.baseUrl,
+			baseURL:this.baseUrl,
 			headers:{
 				//
 			}
@@ -39,15 +39,15 @@ class HttpRequest{
 			return Promise.reject(error)
 		})
 	}
-
-	request(options){
+	request (options) {
 		//axios创建实例
-		const instance=axios.create()
+    const instance = axios.create()
 		//assign合并到一个对象，相同配置的话使用后面options的属性
-		options=Object.assign(this.getInsideConfig(),options)
-		this.interceptors(instance,options.url)
-		return instance(options)
-	}
+    options = Object.assign(this.getInsideConfig(), options)
+		this.interceptors(instance, options.url)
+    return instance(options)
+  }
 }
+
 
 export default HttpRequest

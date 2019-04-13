@@ -3,7 +3,7 @@ import axios from './index'
 export const getUserInfo=({userId})=>{
 	return axios.request({
 		url:'/getUserInfo',
-		method:'get',
+		method:'post',
 		data:{
 			userId
 		}

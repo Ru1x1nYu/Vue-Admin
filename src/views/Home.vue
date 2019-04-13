@@ -7,6 +7,7 @@
     <button @click="handleClick('push')">返回上一页</button>
     <button @click="handleClick('replace')">返回上一页</button>
     <button @click="getInfo">请求数据</button>
+		<img :src="url" alt=""/>
   </div>
 </template>
 
@@ -16,7 +17,12 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import { getUserInfo } from "@/api/user";
 
 export default {
-  name: "home",
+	name: "home",
+	data(){
+		return{
+			url:''
+		}
+	},
   components: {
     HelloWorld
   },
@@ -56,7 +62,8 @@ export default {
     },
     getInfo() {
       getUserInfo({ userId: 21 }).then(res => {
-        console.log("res", res);
+				console.log("res", res.data);
+				this.url=res.data.img
       });
     }
   }

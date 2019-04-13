@@ -10,6 +10,7 @@ const BASE_URL=process.env.NODE_ENV==='procution'?'/Vue-Admin/':'/'
 module.exports = {
 	lintOnSave: false,
 	baseUrl: BASE_URL,
+
 	chainWebpack:config=>{
 		config.resolve.alias
 		.set('@',resolve('src'))
@@ -18,6 +19,6 @@ module.exports = {
 	//打包时不生成.map文件
 	productionSourceMap: false,
 	devServer:{
-		proxy:'http://localhost:4001'
+		// proxy:'http://localhost:4004'
 	}
 }

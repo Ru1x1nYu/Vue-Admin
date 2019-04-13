@@ -1,5 +1,4 @@
 import { getAppName } from "@/api/app";
-import { async } from "q";
 
 const actions = {
 	// updateAppName({commit}){
