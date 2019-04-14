@@ -7,6 +7,9 @@
 
 <script>
 import CountUp from 'countup'
+import { type } from 'os';
+import { setTimeout } from 'timers';
+
 export default {
 	name:'CountTo',
 	computed:{
@@ -103,15 +106,13 @@ export default {
 				this.$nextTick(()=>{
 					this.$emit('on-animation-end',Number(this.getCount()))
 				})
-			},this.duration * 1000+5)
+			},this.duration * 1000)
 		}
 	},
 	watch:{
 		endVal(newVal,oldVal){
-			// this.startVal==oldVal
 			this.counter.update(newVal)
 			this.getEndEvent()
-
 		}
 	},
 	mounted(){
@@ -124,13 +125,9 @@ export default {
 			})
 			setTimeout(()=>{
 				this.counter.start()
-			this.getEndEvent()
+				this.getEndEvent()
 			},this.delay)
 		})
 	}
 }
 </script>
-
-<style lang="scss" scoped>
-@import './count-to.scss';
-</style>
