@@ -8,13 +8,15 @@
     <button @click="handleClick('replace')">返回上一页</button>
     <button @click="getInfo">请求数据</button>
 		<img :src="url" alt=""/>
+		<button @click="handlelogout">退出登录</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-import { getUserInfo } from "@/api/user";
+import HelloWorld from "@/components/HelloWorld.vue"
+import { getUserInfo } from "@/api/user"
+import {mapActions} from 'vuex'
 
 export default {
 	name: "home",
@@ -46,6 +48,9 @@ export default {
   // 	}
   // },
   methods: {
+		...mapActions('user',[
+			'logout'
+		]),
     handleClick(type) {
       if (type === "back") {
         this.$router.back();
@@ -65,7 +70,13 @@ export default {
 				console.log("res", res.data);
 				this.url=res.data.img
       });
-    }
+		},
+		handlelogout(){
+			this.logout()
+			this.$router.push({
+				name:'login'
+			})
+		}
   }
 };
 </script>

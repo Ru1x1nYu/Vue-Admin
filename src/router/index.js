@@ -1,33 +1,53 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './router'
-import { setTitle } from '../lib/utils';
+import { getToken, setToken } from '@/lib/utils'
+import store from '@/store'
 
 Vue.use(Router)
 
-const router= new Router({
+const router = new Router({
   routes: routes
 })
 
-const HAS_LOGINED=true;
+// const HAS_LOGINED = false
 
- router.beforeEach((to, from, next) => {
-	// to and from are both route objects. must call `next`.
-	// if(to.meta.titlle)
-	to.meta&&setTitle(to.meta.title)
-	if(to.name!=='login'){
-		if(HAS_LOGINED) next()
-		else next({name:'login'})
-	}else{
-		if(HAS_LOGINED) next({name:'home'})
-		else next()
-	}
+router.beforeEach((to, from, next) => {
+  // to and from are both route objects. must call `next`.
+  // if(to.meta.titlle)
+  // to.meta && setTitle(to.meta.title)
+  // if (to.name !== 'login') {
+  //   if (HAS_LOGINED) next()
+  //   else next({ name: 'login' })
+  // } else {
+  //   if (HAS_LOGINED) next({ name: 'home' })
+  //   else next()
+  // }
+  const token = getToken()
+  if (token) {
+    store.dispatch('user/authorization', token).then(() => {
+      if (to.name === 'login') {
+        next({ name: 'home' })
+      } else {
+        next()
+      }
+    }).catch(() => {
+      setToken('')
+      next({ name: 'login' })
+    })
+  } else {
+    if (to.name === 'login') {
+      next()
+    } else {
+      next({ name: 'login' })
+    }
+  }
 })
 
 // router.brforeResolve
 router.afterEach((to, from) => {
-	// to and from are both route objects.
-	//logining=false
+  // to and from are both route objects.
+  // logining=false
 })
 
 /**

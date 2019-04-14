@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="ndedav">
+    <!-- <div id="ndedav">
       <router-link to="/home_page">Home</router-link> |
       <router-link :to="{name:'about'}">About</router-link>
-    </div>
+    </div> -->
 		<transition-group :name="routerTransition" mode="out-in">
 		<router-view key="default"/>
     <router-view key="tel" name="tel"/>
@@ -53,7 +53,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
 }
 #nav {
