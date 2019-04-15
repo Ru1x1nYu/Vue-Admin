@@ -1,21 +1,17 @@
 import Home from '@/views/Home.vue'
+import Layout from '@/views/layout.vue'
 export default [
   {
     path: '/',
     alias: '/home_page',
     name: 'home',
-    component: Home,
-    props: route => ({
-      food: route.query.food
-    }),
-    // beforeEnter: (to, from, next) => {
-    // if(from.name==='login') alert('登录页来的')
-    // else alert('这不是登录页来的')
-    // next()
-    // }
-    meta: {
-      title: 'HOME'
-    }
+    component: Layout,
+    children: [
+      {
+        path: 'home',
+        component: Home
+      }
+    ]
   },
   {
     path: '/about',

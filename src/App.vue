@@ -4,7 +4,7 @@
       <router-link to="/home_page">Home</router-link> |
       <router-link :to="{name:'about'}">About</router-link>
     </div> -->
-		<transition-group :name="routerTransition" mode="out-in">
+		<transition-group :name="routerTransition" mode="out-in" tag="div" class="transition-group-wrapper">
 		<router-view key="default"/>
     <router-view key="tel" name="tel"/>
     <router-view key="email" name="email"/>
@@ -31,6 +31,16 @@ export default {
 </script>
 
 <style lang="scss">
+html,body{
+	height: 100%;
+}
+.transition-group-wrapper{
+	height: 100%;
+}
+body{
+	margin: 0;
+	padding: 0
+}
 .router-enter{
 	opacity: 0;
 }
@@ -55,6 +65,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
   color: #2c3e50;
+	height: 100%;
 }
 #nav {
   padding: 30px;

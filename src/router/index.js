@@ -13,9 +13,10 @@ const router = new Router({
 // const HAS_LOGINED = false
 
 router.beforeEach((to, from, next) => {
+  next()
   // to and from are both route objects. must call `next`.
-  // if(to.meta.titlle)
-  // to.meta && setTitle(to.meta.title)
+  // if (to.meta.titlle)
+  //   {to.meta && setTitle(to.meta.title)}
   // if (to.name !== 'login') {
   //   if (HAS_LOGINED) next()
   //   else next({ name: 'login' })
@@ -23,25 +24,26 @@ router.beforeEach((to, from, next) => {
   //   if (HAS_LOGINED) next({ name: 'home' })
   //   else next()
   // }
-  const token = getToken()
-  if (token) {
-    store.dispatch('user/authorization', token).then(() => {
-      if (to.name === 'login') {
-        next({ name: 'home' })
-      } else {
-        next()
-      }
-    }).catch(() => {
-      setToken('')
-      next({ name: 'login' })
-    })
-  } else {
-    if (to.name === 'login') {
-      next()
-    } else {
-      next({ name: 'login' })
-    }
-  }
+
+  // const token = getToken()
+  // if (token) {
+  //   store.dispatch('user/authorization', token).then(() => {
+  //     if (to.name === 'login') {
+  //       next({ name: 'home' })
+  //     } else {
+  //       next()
+  //     }
+  //   }).catch(() => {
+  //     setToken('')
+  //     next({ name: 'login' })
+  //   })
+  // } else {
+  //   if (to.name === 'login') {
+  //     next()
+  //   } else {
+  //     next({ name: 'login' })
+  //   }
+  // }
 })
 
 // router.brforeResolve
