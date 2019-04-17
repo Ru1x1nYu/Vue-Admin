@@ -1,8 +1,20 @@
 <template>
 	<div class="layout-wrapper">
 		<Layout class="layout-outer">
-			<Sider collapsible v-model="collapsed" hide-trigger breakpoint="sm">
+			<Sider
+				collapsible
+				v-model="collapsed"
+				hide-trigger
+				breakpoint="sm"
+				width='300'
+			>
 				<!-- 菜单列表 -->
+				<side-menu
+					:collapsed="collapsed"
+					:list="menuList"
+				>
+					<p slot="logo">LOGO</p>
+				</side-menu>
 			</Sider>
 			<Layout>
 				<Header class="header-wrapper">
@@ -19,10 +31,86 @@
 </template>
 
 <script>
+import SideMenu from '_C/Sider'
 export default {
 	data(){
 		return {
-			collapsed:false
+			collapsed:false,
+			menuList:[
+				{
+					title:'111111',
+					name:'menu1',
+					icon:'ios-alarm'
+				},
+				{
+					title:'222222',
+					name:'menu2',
+					icon:'ios-alarm'
+				},
+				{
+					title:'3',
+					name:'menu3',
+					icon:'ios-alarm',
+					children:[
+						{
+							title:'3-1',
+							name:'menu31',
+							icon:'ios-alarm'
+						},
+						{
+							title:'3-2',
+							name:'menu32',
+							icon:'ios-alarm',
+							children:[
+								{
+									title:'3-2-1',
+									name:'menu321',
+									icon:'ios-alarm'
+								},
+								{
+									title:'3-2-2',
+									name:'menu322',
+									icon:'ios-alarm'
+								},
+							]
+						},
+						{
+							title:'3-3',
+							name:'menu33',
+							icon:'ios-alarm',
+							children:[
+								{
+									title:'3-3-1',
+									name:'menu331',
+									icon:'ios-alarm'
+								},
+								{
+									title:'3-3-2',
+									name:'menu332',
+									icon:'ios-alarm'
+								},
+							]
+						},
+					]
+				},
+				{
+					title:'44',
+					name:'menu4',
+					icon:'ios-alarm'
+				},
+				{
+					title:'5',
+					name:'menu5',
+					icon:'ios-alarm',
+					children:[
+						{
+							title:'5-1',
+							name:'menu51',
+							icon:'ios-alarm'
+						}
+					]
+				}
+			]
 		}
 	},
 	computed:{
@@ -37,6 +125,9 @@ export default {
 		handleCollapsed(){
 			this.collapsed=!this.collapsed
 		}
+	},
+	components:{
+		SideMenu
 	}
 }
 </script>
