@@ -10,6 +10,11 @@ export default [
       {
         path: 'home',
         component: Home
+      },
+      {
+        path: '/tables',
+        name: 'tables',
+        component: () => import('@/views/table.vue')
       }
     ]
   },

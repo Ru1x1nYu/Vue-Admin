@@ -6,8 +6,8 @@
     </div> -->
 		<transition-group :name="routerTransition" mode="out-in" tag="div" class="transition-group-wrapper">
 		<router-view key="default"/>
-    <router-view key="tel" name="tel"/>
-    <router-view key="email" name="email"/>
+    <!-- <router-view key="tel" name="tel"/>
+    <router-view key="email" name="email"/> -->
 		</transition-group>
 
   </div>

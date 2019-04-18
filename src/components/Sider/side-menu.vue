@@ -14,7 +14,7 @@
 				</re-submenu>
 				<menu-item v-else :key="`menu_${item.name}`" :name="item.name">
 					<Icon :type="item.icon" size="26"/>
-							<span>{{item.title}}</span>
+							<span class="menu-item">{{item.title}}</span>
 					</menu-item>
 			</template>
     </Menu>
@@ -62,7 +62,15 @@ export default {
   components: {
     ReSubmenu,
     ReDropdown
-  },
+	},
+	computed:{
+		menuitemClasses () {
+                return [
+                    'menu-item',
+                    this.isCollapsed ? 'collapsed-menu' : ''
+                ]
+            }
+	},
 	methods:{
 		handleSelect(name){
 			console.log(name);

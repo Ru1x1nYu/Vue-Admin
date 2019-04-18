@@ -1,7 +1,7 @@
-import axias from 'axios'
+import axios from './index'
 
-export const getTablData = () => {
-  return axias.request({
+export const getTableData = () => {
+  return axios.request({
     url: '/getTableData',
     method: 'get'
   })
