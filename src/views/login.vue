@@ -11,7 +11,7 @@
 <script>
 import {mapActions} from 'vuex'
 export default {
-	name:'login_page',
+	name:'login',
 	data(){
 		return{
 			userName:'',

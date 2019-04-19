@@ -46,7 +46,7 @@ export default {
 		titleStyle(){
 			return{
 				textAlign:this.showTitle?'left':'center',
-				paddingLeft:this.showTitle?'16px':''
+				paddingLeft:this.showTitle?'20px':''
 			}
 		}
 	},
@@ -61,8 +61,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .ivu-dropdown-menu{
 	min-width: 130px;
 }
-
+.drop-menu-span{
+	cursor: pointer;
+}
 </style>

@@ -157,5 +157,13 @@ export default {
 			}
 		}
 	}
+	.ivu-menu-item{
+		position: relative;
+		.menu-item{
+			position: absolute;
+			top: 0;
+			left: 0;
+			}
+	}
 }
 </style>

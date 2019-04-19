@@ -3,7 +3,7 @@ const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
-const BASE_URL = process.env.NODE_ENV === 'procution' ? '/Vue-Admin/':'/'
+const BASE_URL = process.env.NODE_ENV === 'procution' ? '/Vue-Admin/' : '/'
 
 module.exports = {
   lintOnSave: false,
@@ -17,6 +17,6 @@ module.exports = {
   // 打包时不生成.map文件
   productionSourceMap: false,
   devServer: {
-    // proxy: 'http://localhost:4004'
+    // proxy: 'http://localhost:3004'
   }
 }

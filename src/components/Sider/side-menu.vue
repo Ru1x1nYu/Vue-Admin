@@ -1,7 +1,13 @@
 <template>
   <div class="side-menu-wrapper">
     <slot name="logo"></slot>
-    <Menu v-show="!collapsed" width="auto" theme="dark" @on-select="handleSelect" accordion >
+    <Menu
+		v-show="!collapsed"
+		width="auto"
+		theme="dark"
+		 @on-select="handleSelect"
+		 accordion
+		 >
 			<template v-for="item in list">
 				<re-submenu
 				 class="menu-item"
@@ -13,9 +19,10 @@
 					<menu-item></menu-item>
 				</re-submenu>
 				<menu-item v-else :key="`menu_${item.name}`" :name="item.name">
-					<Icon :type="item.icon" size="26"/>
-							<span class="menu-item">{{item.title}}</span>
-					</menu-item>
+
+					<Icon :type="item.icon" size="26" style="display:inline;"/>
+					<span class="menu-item" style="display:inline;">{{item.title}}</span>
+				</menu-item>
 			</template>
     </Menu>
     <div class="aside-menu-wrapper" v-show="collapsed">
@@ -64,12 +71,7 @@ export default {
     ReDropdown
 	},
 	computed:{
-		menuitemClasses () {
-                return [
-                    'menu-item',
-                    this.isCollapsed ? 'collapsed-menu' : ''
-                ]
-            }
+
 	},
 	methods:{
 		handleSelect(name){
@@ -96,7 +98,7 @@ export default {
   .aside-menu-wrapper {
     .ivu-dropdown{
 			display: block ;
-			padding:10px;
+			padding:10px 0;
 			margin:0 auto;
 			.ivu-select-dropdown{
 				.ivu-dropdown{
@@ -106,11 +108,7 @@ export default {
 		}
   }
 }
-.side-enter-active, .side-leave-active {
-  transition: all .3s ease;
-	opacity: 1;
-}
-.side-enter, .side-leave-to {
-  opacity: 0;
+.ivu-dropdown .ivu-select-dropdown{
+	margin-left: 2px;
 }
 </style>

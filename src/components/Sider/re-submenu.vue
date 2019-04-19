@@ -1,7 +1,7 @@
 <template>
 	<Submenu :name='parent.name' accordion>
 		<template slot="title">
-				<Icon :type="parent.icon"  size="26"/>
+				<Icon :type="parent.icon" size="26" />
 				<span >{{parent.title}}</span>
 		</template>
 		<template v-for="item in parent.children">
