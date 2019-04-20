@@ -20,6 +20,11 @@ export default [
         path: '/folder_tree',
         name: 'folder_tree',
         component: () => import('@/views/folder-tree/folder-tree.vue')
+      },
+      {
+        path: 'forms',
+        name: 'forms',
+        component: () => import('@/views/form.vue')
       }
     ]
   },

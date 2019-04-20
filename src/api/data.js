@@ -20,3 +20,11 @@ export const getFileList = () => {
     method: 'get'
   })
 }
+
+export const sentFormData = ({ url, data }) => {
+  return axios.request({
+    url,
+    data,
+    method: 'post'
+  })
+}
