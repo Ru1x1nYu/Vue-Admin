@@ -15,16 +15,19 @@ const router = new Router({
 const HAS_LOGINED = true
 
 router.beforeEach((to, from, next) => {
-  next()
-  // to and from are both route objects. must call `next`.
-  if (to.meta.titlle) { to.meta && setTitle(to.meta.title) }
-  if (to.name !== 'login') {
-    if (HAS_LOGINED) next()
-    else next({ name: 'login' })
-  } else {
-    if (HAS_LOGINED) next({ name: 'home' })
-    else next()
-  }
+  // next()
+	// to and from are both route objects. must call `next`.
+	console.log(to.meta.title);
+	to.meta && setTitle(to.meta.title)
+
+  // if (to.meta.titlle) { to.meta && setTitle(to.meta.title) }
+  // if (to.name !== 'login') {
+  //   if (HAS_LOGINED) next()
+  //   else next({ name: 'login' })
+  // } else {
+  //   if (HAS_LOGINED) next({ name: 'home' })
+  //   else next()
+  // }
 
   //   const token = getToken()
   //   if (token) {

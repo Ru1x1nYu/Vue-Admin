@@ -137,6 +137,7 @@ export default {
 	height: 100%;
 	.layout-outer{
 		height: 100%;
+		.ivu-layout-sider{    transition: all .3s ease-out;}
 		.header-wrapper{
 			background-color: #fff;
 			box-shadow: 0 1px 1px rgba(0, 0, 1, 0.1);

@@ -1,10 +1,9 @@
 <template>
 	<div>
-		<form action="">
 			<input v-model="userName">
 			<input v-model="password">
 			<button @click="handleSubmit">登陆了</button>
-			</form>
+
 	</div>
 </template>
 

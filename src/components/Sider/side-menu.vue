@@ -2,7 +2,7 @@
   <div class="side-menu-wrapper">
     <slot name="logo"></slot>
     <Menu
-		v-show="!collapsed"
+		v-if="!collapsed"
 		width="auto"
 		theme="dark"
 		 @on-select="handleSelect"
@@ -44,6 +44,7 @@
         >
           <span class="drop-menu-span" @click="handleClick(item.name)">
             <Icon :type="item.icon" :size="30" color="#fff"></Icon>
+						<!-- <span class="aside-menu-item" >{{item.title}}</span> -->
           </span>
         </Tooltip>
       </template>
@@ -105,6 +106,12 @@ export default {
 					padding: 0;
 				}
 			}
+		}
+		.aside-menu-item{
+			width: 100px;
+			// display: none;
+			// display: block;
+			transition:all 3s ease-in-out;
 		}
   }
 }

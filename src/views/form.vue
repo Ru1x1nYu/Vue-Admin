@@ -11,7 +11,20 @@
         <Button type="primary" @click="handleSubmit">提交</Button>
       </FormItem>
     </Form> -->
-			<form-group :list='formList' :url='url'></form-group>
+			<!-- <form-group :list='formList' :url='url'></form-group> -->
+			<form-single
+				ref="formSingle"
+				v-for="(item,index) in formList"
+				:key="`form_${index}`"
+				:config='item'
+				:value-data='valueData'
+				:rule-data='ruleData'
+				:error-data='errorData'
+			>
+
+			</form-single>
+			<Button type="primary" ref="button" @click='handleSubmit'>提交</Button>
+			<Button @click="handleReset">重置</Button>
   </div>
 </template>
 
@@ -24,10 +37,15 @@ import FormGroup from '_C/form-group'
     callback();
   }
 };*/
+import formData from '@/mock/response/form-data'
+import FormSingle from '_C/form-single'
+import { sentFormData } from "@/api/data";
+import clonedeep from 'clonedeep'
 export default {
 	name: "forms",
 	components:{
-		FormGroup
+		FormGroup,
+		FormSingle
 	},
   data() {
     return {
@@ -49,71 +67,11 @@ export default {
 					}
         ]
       }*/
-		formList:[
-			{
-				name:'name',
-				type:'i-input',
-				value:'',
-				label:'姓名',
-				rule:[
-					{ required: true, message: 'The name cannot be empty', trigger: 'blur' }
-				]
-			},
-			{
-				name:'range',
-				type:'slider',
-				value:[10,400],
-				range:true,
-				label:'范围'
-			},
-			{
-				name:'sex',
-				type:'i-select',
-				value:'man',
-				label:'性别',
-				children:{
-					type:'i-option',
-					list:[
-						{value:'man',title:'男'},
-						{value:'woman',title:'女'}
-					]
-				}
-			},
-			{
-				name:'education',
-				type:'radio-group',
-				value:1,
-				label:'学历',
-				children:{
-					type:'radio',
-					list:[
-						{label:1,title:'高中'},
-						{label:2,title:'大学'},
-						{label:3,title:'社会'}
-					]
-				}
-			},
-			{
-				name:'skill',
-				type:'checkbox-group',
-				value:[],
-				label:'技能',
-				children:{
-					type:'checkbox',
-					list:[
-						{label:1,title:'Vue'},
-						{label:2,title:'Nodejs'},
-						{label:3,title:'Java'}
-					]
-				}
-			},
-			{
-				name:'inWork',
-				type:'i-switch',
-				value:true,
-				label:'在职'
-			}
-		]
+		formList:formData,
+		valueData:{},
+		ruleData:{},
+		errorData:{},
+		initValueDate:{}
 		};
   },
   methods: {
@@ -127,8 +85,68 @@ export default {
       });
 		}*/
 
+		handleReset(){
+			this.valueData=clonedeep(this.initValueDate)
+		},
+		handleSubmit(){
+			// this.$refs.form.validate(valid=>{
+			// 	if(valid){
+			// 		sentFormData({
+			// 			url:this.url,
+			// 			data:this.valueList
+			// 		}).then(res=>{
+			// 			this.$emit('on-submit-success',res)
+			// 		}).catch(err=>{
+			// 			console.log(err);
+			// 			this.$emit('on-submit-error',err)
+			// 			for(let key in err){
+			// 				this.errorData[key]=err[key]
+			// 			}
+			// 		})
+			// 	}
+			// })
+			//组件的ref获取到的是数组，原生的获取到则是DOM
+			let isVaild=true
+			this.$refs.formSingle.forEach(item=>{
+				item.validate(valid=>{
+					if(!valid){
+						isVaild=false
+					}
+				})
+				if(isVaild){
+					sentFormData({
+						url:this.url,
+						data:this.valueData
+					}).then(res=>{
+						console.log('success');
+						this.$emit('on-submit-success',res)
+					}).catch(err=>{
+						this.$emit('on-submit-error',err)
+						for(let key in err){
+							this.errorData[key]=err[key]
+						}
+					})
+				}
+			})
+		},
 
-  }
+	},
+	mounted(){
+		let valueData={}
+		let ruleData={}
+		let errorData={}
+		let initValueDate={}
+		formData.forEach(item => {
+			valueData[item.name]=item.value
+			ruleData[item.name]=item.rule
+			errorData[item.name]=''
+			initValueDate[item.name]=item.value
+		})
+		this.valueData=valueData
+		this.ruleData=ruleData
+		this.errorData=errorData
+		this.initValueDate=initValueDate
+	}
 };
 </script>
 

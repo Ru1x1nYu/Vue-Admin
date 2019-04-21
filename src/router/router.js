@@ -23,13 +23,22 @@ export const routerMap = [
         component: () => import('@/views/folder-tree/folder-tree.vue')
       },
       {
-        path: 'forms',
+        path: 'form',
         name: 'forms',
         component: () => import('@/views/form.vue')
-      },{
+			},
+			{
 				path:'icon',
 				name:'icon_page',
 				component:()=>import('@/views/icon_page.vue')
+			},
+			{
+				path:'optimize',
+				meta:{
+					title:'大数据优化'
+				},
+				name:'optimize',
+				component:()=>import('@/views/optimize.vue')
 			}
     ]
   },
