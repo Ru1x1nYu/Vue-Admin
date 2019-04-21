@@ -1,23 +1,24 @@
-import Home from '@/views/Home.vue'
+
 import Layout from '@/views/layout.vue'
-export default [
+export const routerMap = [
   {
     path: '/',
-    alias: '/home_page',
+    // alias: '/home_page',
     name: 'home',
     component: Layout,
     children: [
       {
         path: 'home',
-        component: Home
+        name: 'home_index',
+        component: ()=>import('@/views/Home.vue')
       },
       {
-        path: '/tables',
+        path: 'tables',
         name: 'tables',
         component: () => import('@/views/table.vue')
       },
       {
-        path: '/folder_tree',
+        path: 'folder_tree',
         name: 'folder_tree',
         component: () => import('@/views/folder-tree/folder-tree.vue')
       },
@@ -71,11 +72,7 @@ export default [
       }
     ]
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login.vue')
-  },
+
   {
     path: '/store',
     name: 'store',
@@ -100,8 +97,19 @@ export default [
     path: '/menu_page',
     name: 'menu_page',
     component: () => import('@/views/menu-page.vue')
-  },
+  }
 
+]
+
+export const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    meta: {
+      title: '登录'
+    },
+    component: () => import('@/views/login.vue')
+  },
   {
     path: '*',
     component: () => import('@/views/404.vue')

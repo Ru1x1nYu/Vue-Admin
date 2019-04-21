@@ -1,7 +1,8 @@
 import { login, authorization } from '@/api/user'
 import { setToken } from '@/lib/utils'
 const state = {
-  userName: '小余'
+	userName: '小余',
+	rules:{}
 }
 const getters = {
   firstLetter: (state) => {
@@ -12,6 +13,9 @@ const getters = {
 const mutations = {
   SET_USER_NAME (state, params) {
     state.userName = params
+	},
+	SET_RULES (state, rules) {
+    state.rules = rules
   }
 }
 
@@ -19,7 +23,7 @@ const actions = {
   updateUserName ({ commit, state, rootState, dispatch }) {
 
   },
-  login ({ dispatch }, { userName, password }) {
+  login ({ commit }, { userName, password }) {
     return new Promise((resolve, reject) => {
       login({ userName, password }).then(res => {
         if (res.code === 200 && res.data.token) {
@@ -40,7 +44,8 @@ const actions = {
           reject(new Error('token错误'))
         } else {
           setToken(res.data.token)
-          resolve()
+					resolve(res.data.rules.page)
+					commit('SET_RULES', res.data.rules.component)
         }
       }).catch(error => {
         reject(error)

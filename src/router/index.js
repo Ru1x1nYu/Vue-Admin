@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import routes from './router'
+import {routes} from './router'
 import { setTitle, getToken, setToken } from '@/lib/utils'
 import store from '@/store'
+import clonedeep from 'clonedeep'
 
 Vue.use(Router)
 
 const router = new Router({
+  // mode: 'history',
   routes: routes
 })
 
@@ -24,24 +26,48 @@ router.beforeEach((to, from, next) => {
     else next()
   }
 
+  //   const token = getToken()
+  //   if (token) {
+  //     store.dispatch('user/authorization', token).then(() => {
+  //       if (to.name === 'login') {
+  //         next({ name: 'home' })
+  //       } else {
+  //         next()
+  //       }
+  //     }).catch(() => {
+  //       setToken('')
+  //       next({ name: 'login' })
+  //     })
+  //   } else {
+  //     if (to.name === 'login') {
+  //       next()
+  //     } else {
+  //       next({ name: 'login' })
+  //     }
+  //   }
+
   const token = getToken()
   if (token) {
-    store.dispatch('user/authorization', token).then(() => {
-      if (to.name === 'login') {
-        next({ name: 'home' })
-      } else {
-        next()
-      }
-    }).catch(() => {
-      setToken('')
-      next({ name: 'login' })
-    })
-  } else {
-    if (to.name === 'login') {
-      next()
+    // 存在token，使之获得路由规则
+    if (!store.state.router.hasGetRules) {
+      store.dispatch('user/authorization').then(rules => {
+        store.dispatch('router/concatRoutes', rules).then(routers => {
+					// console.log(routers);
+          router.addRoutes(routers)
+          next({ ...to, replace: true })
+        }).catch(() => {
+          next({ path: '/login' })
+        })
+      }).catch(() => {
+        setToken('')
+        next({ name: 'login' })
+      })
     } else {
-      next({ name: 'login' })
+      next()
     }
+  } else {
+    if (to.name === 'login') next()
+		else next({ name: 'login' })
   }
 })
 

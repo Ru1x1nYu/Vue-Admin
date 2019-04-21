@@ -10,7 +10,7 @@
 		<img :src="url" alt=""/>
 		<button @click="handlelogout">退出登录</button> -->
 		<Row>
-			<i-col>11</i-col>
+			<i-col>{{rules}}</i-col>
 		</Row>
 		<Row :gutter="10">
 			<i-col span="12"></i-col>
@@ -32,6 +32,8 @@
 			<i-col :sm="8"></i-col>
 			<i-col :sm="8"></i-col>
 		</Row>
+		<Button :disabled='!rules.edit_button'>编辑</Button>
+		<Button :disabled='!rules.publish_button'>发布</Button>
   </div>
 </template>
 
@@ -39,7 +41,7 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue"
 import { getUserInfo } from "@/api/user"
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
 	name: "home",
@@ -56,7 +58,12 @@ export default {
       type: String,
       default: "nice"
     }
-  },
+	},
+	computed:{
+		...mapState('user',{
+			rules: state=>state.rules
+		})
+	},
   beforeRouteEnter(to, from, next) {
     next(vm => {
       console.log(vm);

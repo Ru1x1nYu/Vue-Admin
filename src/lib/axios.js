@@ -35,7 +35,7 @@ class HttpRequest {
     instance.interceptors.response.use(res => {
       delete this.queue[url]
       const { data } = res
-      return data
+			return data
     }, error => {
       delete this.queue[url]
       return Promise.reject(error.response.data)

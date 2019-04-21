@@ -5,17 +5,19 @@ import getters from './getters'
 import mutation from './mutation'
 import actions from './actions'
 import user from './module/user'
-import savaInLocal from './plugin/saveInLocal'
+import router from './module/router'
+// import savaInLocal from './plugin/saveInLocal'
 Vue.use(Vuex)
 export default new Vuex.Store({
-  strict: process.env.NODE_ENV === 'development',
+  strict: false,
   namespaced: true,
   state: state,
   mutations: mutation,
   getters: getters,
   actions: actions,
   modules: {
-    user
+    user,
+    router
   }
   // plugins: [ savaInLocal ]
 })
