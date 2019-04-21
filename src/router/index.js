@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
       store.dispatch('user/authorization').then(rules => {
         store.dispatch('router/concatRoutes', rules).then(routers => {
 					// console.log(routers);
-          router.addRoutes(routers)
+          router.addRoutes(clonedeep(routers))
           next({ ...to, replace: true })
         }).catch(() => {
           next({ path: '/login' })

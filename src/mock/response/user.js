@@ -83,7 +83,8 @@ export const authorization = () => {
           child: true,
           named_view: true,
           store: true,
-          main: true
+					main: true,
+					icon_page:true
         },
         component: {
           edit_button: true,

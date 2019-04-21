@@ -26,7 +26,11 @@ export const routerMap = [
         path: 'forms',
         name: 'forms',
         component: () => import('@/views/form.vue')
-      }
+      },{
+				path:'icon',
+				name:'icon_page',
+				component:()=>import('@/views/icon_page.vue')
+			}
     ]
   },
   {
