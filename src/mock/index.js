@@ -5,8 +5,8 @@ const Random = Mock.Random
 
 Mock.mock(/\/getUserInfo/, 'post', getUserInfo)
 Mock.mock(/\/getTableData/, 'get', getTableData)
-// Mock.mock(/\/login/, 'post', login)
-// Mock.mock(/\/authorization/, 'get', authorization)
+Mock.mock(/\/login/, 'post', login)
+Mock.mock(/\/authorization/, 'get', authorization)
 Mock.mock(/\/getFolderList/, 'get', getFolderList)
 Mock.mock(/\/getFileList/, 'get', getFileList
 )
