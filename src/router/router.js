@@ -100,15 +100,24 @@ export const routerMap = [
 			title:'MAIN'
 		},
     redirect: to => 'home_page'
-  },
-  {
-    path: '/parent',
-		name: 'parent',
+	},
+	{
+		path: '/parent',
+    // alias: '/home_page',
+		// name: 'parents',
 		meta:{
-			title:'Parent'
+			title:'父类与子类'
 		},
-    component: () => import('@/views/parent.vue'),
+    component: Layout,
     children: [
+			{
+				path: '',
+				name: 'parent',
+				meta:{
+					title:'Parent'
+				},
+				component: () => import('@/views/parent.vue'),
+			},
       {
 				path: 'child',
 				name:'child',
@@ -118,16 +127,26 @@ export const routerMap = [
         component: () => import('@/views/child.vue')
       }
     ]
-  },
-
-  {
-    path: '/store',
+	},
+	{
+		path: '/store',
 		name: 'store',
 		meta:{
-			title:'Store'
+			title:'Store',
+			hideInBread: true
 		},
-    component: () => import('@/views/store.vue')
-  },
+    component: Layout,
+		children: [
+			{
+				path: 'store_page',
+				name: 'store_page',
+				meta:{
+					title:'Store'
+				},
+				component: () => import('@/views/store.vue')
+			}
+		]
+	},
   {
     path: '/count-to',
 		name: 'count_to',

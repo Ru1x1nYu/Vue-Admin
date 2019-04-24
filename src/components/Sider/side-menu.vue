@@ -12,13 +12,13 @@
       <template v-for="item in list">
         <re-submenu
           class="menu-item"
-          v-if="item.children"
+           v-if="item.children"
           :key="`menu_${item.name}`"
-          :name="item.name"
+          :name="getNameOrHref(item, true)"
           :parent="item"
         >
         </re-submenu>
-        <menu-item v-else :key="`menu_${item.name}`" :name="item.name">
+        <menu-item v-else :key="`menu_${item.name}`" :name="getNameOrHref(item)">
           <Icon :type="item.icon" style="display:inline;"/>
           <span class="menu-item" style="display:inline;">{{item.meta.title}}</span>
         </menu-item>
@@ -79,6 +79,12 @@ export default {
     },
     handleClick(name) {
       console.log(name);
+		},
+		showChildren (item) {
+      return item.children && (item.children.length > 1 || (item.meta && item.meta.showAlways))
+		},
+		getNameOrHref (item, children0) {
+      return item.href ? `isTurnByHref_${item.href}` : (children0 ? item.children[0].name : item.name)
     }
   }
 };

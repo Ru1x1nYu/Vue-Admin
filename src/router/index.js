@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import {routes} from './router'
 import { setTitle, getToken, setToken } from '@/lib/utils'
 import store from '@/store'
+import iView from 'iview'
 import clonedeep from 'clonedeep'
 
 Vue.use(Router)
@@ -14,7 +15,10 @@ const router = new Router({
 
 const HAS_LOGINED = true
 
+
+
 router.beforeEach((to, from, next) => {
+	iView.LoadingBar.start()
   // next()
 	// to and from are both route objects. must call `next`.
 	console.log(to.meta.title);
@@ -77,7 +81,10 @@ router.beforeEach((to, from, next) => {
 // router.brforeResolve
 router.afterEach((to, from) => {
   // to and from are both route objects.
-  // logining = false
+	// logining = false
+	setTitle(to, router.app)
+  iView.LoadingBar.finish()
+  window.scrollTo(0, 0)
 })
 
 /**
